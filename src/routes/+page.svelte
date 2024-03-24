@@ -1,7 +1,13 @@
 <script>
 	import Header from '$components/Header.svelte';
-	import Board from '$components/GameBoard/Board.svelte';
+	import Container from '$components/Container.svelte';
 </script>
 
 <Header />
-<Board />
+<Container />
+
+<style lang="scss">
+	:global(body) {
+		background-color: #f0f0f0;
+	}
+</style>

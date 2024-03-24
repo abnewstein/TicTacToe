@@ -1,13 +1,19 @@
+import { generateWinIndices } from "$lib/utils";
+
 export function createGameState() {
     let gridSize = $state(3);
     let grid = $state(Array.from({ length: gridSize ** 2 }, () => ''));
     let currentPlayer = $state("X");
     let winner = $state('');
+    let history = $state([]);
+    let winningLines = generateWinIndices(gridSize);
 
     function reset() {
         grid = (Array.from({ length: gridSize ** 2 }, () => ''));
         currentPlayer = "X";
         winner = '';
+        history = [];
+        winningLines = generateWinIndices(gridSize);
     }
 
     /**
@@ -18,21 +24,11 @@ export function createGameState() {
         reset();
     }
 
+    /**
+     * @returns {boolean}
+     */
     function checkWinner() {
-        let lines = [];
-
-        for (let i = 0; i < gridSize; i++) {
-            // Horizontal
-            lines.push(Array.from({ length: gridSize }, (_, j) => i * gridSize + j));
-            // Vertical
-            lines.push(Array.from({ length: gridSize }, (_, j) => i + j * gridSize));
-        }
-        // Forward diagonal
-        lines.push(Array.from({ length: gridSize }, (_, i) => i * gridSize + i));
-        // Backward diagonal
-        lines.push(Array.from({ length: gridSize }, (_, i) => i * gridSize + gridSize - i - 1));
-
-        for (let line of lines) {
+        for (let line of winningLines) {
             let lineValues = line.map(index => grid[index]);
             if (lineValues.every(value => value === "X") || lineValues.every(value => value === "O")) {
                 return true;
@@ -55,6 +51,8 @@ export function createGameState() {
         } else {
             currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
+
+        history = [...history, { index, currentPlayer }]
     }
 
     return {
@@ -69,6 +67,9 @@ export function createGameState() {
         },
         get winner() {
             return winner;
+        },
+        get history() {
+            return history;
         },
         reset,
         initGrid,
