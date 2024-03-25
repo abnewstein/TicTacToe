@@ -1,11 +1,12 @@
 <script>
+	import { derived } from 'svelte/store';
 	import Cell from './Cell.svelte';
 	let { gameState } = $props();
-	const { grid, gridSize, play, winner } = gameState;
+	let { gridSize, play } = $derived(gameState);
 </script>
 
 <div class="board" style="--grid-size: {gridSize}">
-	{#each grid as value, index}
+	{#each gameState.grid as value, index}
 		<Cell {value} {index} {play} />
 	{/each}
 </div>
@@ -15,9 +16,9 @@
 		display: grid;
 		grid-template-columns: repeat(var(--grid-size), 100px);
 		grid-gap: 0.25rem;
-		margin: 2rem;
 		justify-content: center;
 		align-items: center;
+		height: max-content;
 	}
 
 	.winner {

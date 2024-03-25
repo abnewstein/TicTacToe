@@ -10,6 +10,6 @@
 		text-align: center;
 		border-radius: 5px;
 		font-size: 1.5rem;
-		font-family: cursive;
+		font-family: monospace;
 	}
 </style>

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { generateWinIndices } from "$lib/utils";
 
 export function createGameState() {
@@ -5,6 +6,7 @@ export function createGameState() {
     let grid = $state(Array.from({ length: gridSize ** 2 }, () => ''));
     let currentPlayer = $state("X");
     let winner = $state('');
+    let isDraw = $state(false);
     let history = $state([]);
     let winningLines = generateWinIndices(gridSize);
 
@@ -12,8 +14,20 @@ export function createGameState() {
         grid = (Array.from({ length: gridSize ** 2 }, () => ''));
         currentPlayer = "X";
         winner = '';
+        isDraw = false;
         history = [];
         winningLines = generateWinIndices(gridSize);
+    }
+
+    function resetToStep(step) {
+        if (step < 0 || step >= history.length) return;
+        if (step === 0) return reset();
+
+        grid = history[step - 1];
+        currentPlayer = step % 2 === 0 ? "X" : "O";
+        winner = '';
+        isDraw = false;
+        history = history.slice(0, step);
     }
 
     /**
@@ -45,14 +59,17 @@ export function createGameState() {
         if (grid[index] || winner) return;
 
         grid[index] = currentPlayer;
+        history = [...history, grid.slice()]
 
         if (checkWinner()) {
             winner = currentPlayer;
         } else {
+            if (!grid.includes('')) {
+                isDraw = true;
+            }
             currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
 
-        history = [...history, { index, currentPlayer }]
     }
 
     return {
@@ -68,10 +85,14 @@ export function createGameState() {
         get winner() {
             return winner;
         },
+        get isDraw() {
+            return isDraw;
+        },
         get history() {
             return history;
         },
         reset,
+        resetToStep,
         initGrid,
         play,
         checkWinner
