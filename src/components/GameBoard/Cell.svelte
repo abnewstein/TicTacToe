@@ -1,5 +1,5 @@
 <script>
-	let { value, index, play } = $props();
+	let { value, index, play, highlight } = $props();
 
 	/**
 	 * @param {number} index
@@ -11,7 +11,7 @@
 	}
 </script>
 
-<button type="button" on:click={() => handleClick(index)}>{value} </button>
+<button type="button" on:click={() => handleClick(index)} class:highlight>{value}</button>
 
 <style lang="scss">
 	button {
@@ -25,7 +25,11 @@
 		color: #333;
 		justify-content: center;
 		align-items: center;
-		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		font-family: Cambria, serif;
 		font-size: 4rem;
+
+		&.highlight {
+			background-color: #81c784;
+		}
 	}
 </style>

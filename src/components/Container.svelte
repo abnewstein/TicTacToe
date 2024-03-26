@@ -2,20 +2,12 @@
 	import { createGameState } from '$store/GameState.svelte';
 	import Board from './GameBoard/Board.svelte';
 	import GameHistory from './GameHistory.svelte';
+	import PlayerInfo from './PlayerInfo.svelte';
 	let gameState = createGameState();
-	let winner = $derived(gameState.winner);
 </script>
 
 <div class="container">
-	<div class="player-info">
-		{#if winner !== ''}
-			<p>Player {winner} wins!</p>
-		{:else if gameState.isDraw}
-			<p>It's a draw!</p>
-		{:else}
-			<p>It's player {gameState.currentPlayer}'s turn</p>
-		{/if}
-	</div>
+	<PlayerInfo {gameState} />
 	<Board {gameState} />
 	<GameHistory {gameState} />
 </div>
@@ -29,13 +21,9 @@
 		justify-content: center;
 		margin: 2rem;
 
-		.player-info {
-			display: flex;
-			justify-content: end;
-			align-items: center;
-			font-size: 1.5rem;
-			font-family: monospace;
-			font-weight: bold;
+		@media (width < 768px) {
+			grid-template-columns: 1fr;
+			grid-template-rows: min-content max-content 1fr;
 		}
 	}
 </style>

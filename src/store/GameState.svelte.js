@@ -8,26 +8,29 @@ export function createGameState() {
     let winner = $state('');
     let isDraw = $state(false);
     let history = $state([]);
-    let winningLines = generateWinIndices(gridSize);
+    let winningIndices = generateWinIndices(gridSize);
+    let winningLine = $state([]);
 
     function reset() {
-        grid = (Array.from({ length: gridSize ** 2 }, () => ''));
+        grid = Array.from({ length: gridSize ** 2 }, () => '');
         currentPlayer = "X";
         winner = '';
         isDraw = false;
         history = [];
-        winningLines = generateWinIndices(gridSize);
+        winningIndices = generateWinIndices(gridSize);
+        winningLine = [];
     }
 
     function resetToStep(step) {
         if (step < 0 || step >= history.length) return;
         if (step === 0) return reset();
 
-        grid = history[step - 1];
-        currentPlayer = step % 2 === 0 ? "X" : "O";
+        history = history.slice(0, step);
+        grid = history[history.length - 1];
+        currentPlayer = (step % 2 === 0) ? "X" : "O";
         winner = '';
         isDraw = false;
-        history = history.slice(0, step);
+        winningLine = [];
     }
 
     /**
@@ -42,9 +45,10 @@ export function createGameState() {
      * @returns {boolean}
      */
     function checkWinner() {
-        for (let line of winningLines) {
+        for (let line of winningIndices) {
             let lineValues = line.map(index => grid[index]);
             if (lineValues.every(value => value === "X") || lineValues.every(value => value === "O")) {
+                winningLine = line;
                 return true;
             }
         }
@@ -69,7 +73,6 @@ export function createGameState() {
             }
             currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
-
     }
 
     return {
@@ -90,6 +93,9 @@ export function createGameState() {
         },
         get history() {
             return history;
+        },
+        get winningLine() {
+            return winningLine;
         },
         reset,
         resetToStep,

@@ -25,6 +25,11 @@
 		flex-direction: column;
 		align-items: start;
 		font-family: 'Courier New', Courier, monospace;
+
+		@media (width < 768px) {
+			align-items: center;
+		}
+
 		> div {
 			background-color: #dddddd;
 			padding: 0 1rem;

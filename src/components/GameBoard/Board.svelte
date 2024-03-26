@@ -1,13 +1,13 @@
 <script>
-	import { derived } from 'svelte/store';
 	import Cell from './Cell.svelte';
 	let { gameState } = $props();
-	let { gridSize, play } = $derived(gameState);
+	let winningLine = $derived(gameState.winningLine);
 </script>
 
-<div class="board" style="--grid-size: {gridSize}">
+<div class="board" style="--grid-size: {gameState.gridSize}">
 	{#each gameState.grid as value, index}
-		<Cell {value} {index} {play} />
+		{@const highlight = winningLine?.includes(index)}
+		<Cell {value} {index} play={gameState.play} {highlight} />
 	{/each}
 </div>
 
