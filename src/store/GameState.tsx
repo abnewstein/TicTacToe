@@ -47,9 +47,13 @@ function createGameState() {
     }
   };
 
-  const goTo = (step: number) => {
-    setGrid(history()[step]);
-    setHistory(history().slice(0, step + 1));
+  const goBackToStep = (step: number) => {
+    if (step === 0) {
+      reset();
+      return;
+    }
+    setGrid(history()[step - 1]);
+    setHistory(history().slice(0, step));
     setCurrentPlayer(step % 2 === 0 ? "X" : "O");
     setWinner(null);
   };
@@ -64,7 +68,7 @@ function createGameState() {
     winningLine,
     reset,
     play,
-    goTo,
+    goBackToStep,
   };
 }
 
