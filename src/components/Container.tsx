@@ -15,6 +15,7 @@ export default function Container() {
     isDraw,
     goBackToStep,
     history,
+    reset,
   } = GameState;
 
   return (
@@ -23,6 +24,7 @@ export default function Container() {
         winner={winner()}
         currentPlayer={currentPlayer()}
         isDraw={isDraw()}
+        reset={reset}
       />
       <Board
         gridSize={gridSize()}

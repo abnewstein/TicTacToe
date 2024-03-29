@@ -6,6 +6,7 @@ export default function PlayerInfo(props: {
   winner: Player | null;
   isDraw: boolean;
   currentPlayer: Player;
+  reset: () => void;
 }) {
   return (
     <div class={styles["player-info"]}>
@@ -17,6 +18,7 @@ export default function PlayerInfo(props: {
           <p>Player {props.winner} wins!</p>
         </Match>
       </Switch>
+      <button onClick={props.reset}>Reset</button>
     </div>
   );
 }
