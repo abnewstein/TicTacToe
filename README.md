@@ -1,14 +1,14 @@
 ## Usage
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
-
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
-
 ```bash
-$ npm install # or pnpm install or yarn install
+$ npm install # or pnpm install or yarn install or bun install
 ```
+Screenshot 1:
+![image](https://github.com/abnewstein/TicTacToe/assets/7012732/5ef32831-1504-4391-95a0-3466a6f1b1ab)
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+Screenshot 2:
+![image](https://github.com/abnewstein/TicTacToe/assets/7012732/f3ab7edb-3087-4c35-a6e7-b36611b706cf)
+
 
 ## Available Scripts
 
