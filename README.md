@@ -1,14 +1,18 @@
-## Usage
+## Tic Tac Toe
 
-```bash
-$ npm install # or pnpm install or yarn install or bun install
-```
+This is a simple Tic Tac Toe game that supports various grid sizes.
+
 Screenshot 1:
 ![image](https://github.com/abnewstein/TicTacToe/assets/7012732/5ef32831-1504-4391-95a0-3466a6f1b1ab)
 
 Screenshot 2:
 ![image](https://github.com/abnewstein/TicTacToe/assets/7012732/f3ab7edb-3087-4c35-a6e7-b36611b706cf)
 
+## Usage
+
+```bash
+$ npm install # or pnpm install or yarn install or bun install
+```
 
 ## Available Scripts
 
