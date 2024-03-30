@@ -26,7 +26,6 @@ function createGameState() {
   });
 
   const reset = () => {
-    setGridSize(3);
     setGrid(Array.from({ length: gridSize() ** 2 }, () => null));
     setCurrentPlayer("X");
     setWinner(null);
@@ -58,6 +57,11 @@ function createGameState() {
     setWinner(null);
   };
 
+  const changeGridSize = (size: number) => {
+    setGridSize(size);
+    reset();
+  };
+
   return {
     gridSize,
     grid,
@@ -69,6 +73,7 @@ function createGameState() {
     reset,
     play,
     goBackToStep,
+    changeGridSize,
   };
 }
 

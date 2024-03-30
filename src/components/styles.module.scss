@@ -83,7 +83,7 @@ $background-color: #16232e;
 
           &.highlight,
           &:hover {
-            background-color: $accent-color;
+            background-color: $secondary-color;
           }
         }
       }
@@ -143,11 +143,53 @@ $background-color: #16232e;
   font-weight: bold;
 
   @media (width < 768px) {
+    flex-direction: row;
+
     justify-content: end;
   }
 
   button {
     @include button;
     font-size: 1.5rem;
+  }
+
+  > div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem;
+    border: 2px solid $primary-color;
+    border-radius: 5px;
+    padding: 0 0.5rem;
+    height: 100%;
+
+    @media (width < 768px) {
+      justify-content: center;
+      align-items: center;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      gap: 0.5rem;
+
+      select {
+        background-color: $primary-color;
+        border: none;
+        border-radius: 5px;
+        color: $text-color;
+        font-size: 2rem;
+        padding: 0.25rem;
+        width: 3rem;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $secondary-color;
+          color: $background-color;
+        }
+      }
+    }
   }
 }
